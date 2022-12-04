@@ -1,0 +1,16 @@
+{
+  "name": "dao",
+  "version": "0.0.0",
+  "description": "data access object for firestore",
+  "main": "./src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "config": "*",
+    "schema": "*",
+    "tsconfig": "*",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "firebase": "^9.14.0"
+  }
+}
