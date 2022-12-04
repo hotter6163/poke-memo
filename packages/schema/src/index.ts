@@ -1,10 +1,8 @@
 import { z } from 'zod';
 
-const WithIdSchema = z
-  .object({
-    id: z.string(),
-  })
-  .required();
+const WithIdSchema = z.object({
+  id: z.string(),
+});
 
 const BaseUserSchema = z.object({
   name: z.string(),
