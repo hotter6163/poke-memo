@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType, NextPage } from 'next';
-import { getUsers } from 'dao';
+import { getUsers } from 'store';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
