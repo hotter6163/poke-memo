@@ -6,12 +6,10 @@ const WithIdSchema = z
   })
   .required();
 
-const BaseUserSchema = z
-  .object({
-    name: z.string(),
-    age: z.number(),
-  })
-  .required();
+const BaseUserSchema = z.object({
+  name: z.string(),
+  age: z.number(),
+});
 
 export const UserSchema = BaseUserSchema.merge(WithIdSchema);
 
