@@ -1,8 +1,18 @@
 import { z } from 'zod';
 
-export const UserSchema = z.object({
-  name: z.string(),
-  age: z.number(),
-});
+const WithIdSchema = z
+  .object({
+    id: z.string(),
+  })
+  .required();
+
+const BaseUserSchema = z
+  .object({
+    name: z.string(),
+    age: z.number(),
+  })
+  .required();
+
+export const UserSchema = BaseUserSchema.merge(WithIdSchema);
 
 export type User = z.infer<typeof UserSchema>;
