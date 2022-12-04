@@ -2,11 +2,6 @@ import { collection, getDocs } from 'firebase/firestore';
 import { z } from 'zod';
 import { db } from './db';
 
-// 必要な機能
-// create
-// read
-// update
-// delete
 export const constructor =
   <T extends z.ZodRawShape>(path: string[], schema: z.ZodObject<T>) =>
   () =>
