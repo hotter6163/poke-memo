@@ -3,9 +3,9 @@ import { WithIdSchema } from './common/withId';
 import { TypeSchema } from './Type';
 
 enum MoveSpecies {
-  Physical = '物理',
-  Special = '特殊',
-  Status = '変化',
+  Physical = 'physical',
+  Special = 'special',
+  Status = 'status',
 }
 
 export const MoveSchema = z
