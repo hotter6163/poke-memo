@@ -1,0 +1,12 @@
+{
+  "name": "utilities",
+  "version": "0.0.0",
+  "description": "utilities packages",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "config": "*",
+    "tsconfig": "*",
+    "typescript": "^4.9.4"
+  }
+}

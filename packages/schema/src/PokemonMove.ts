@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { WithIdSchema } from './common/withId';
+import { ObjectSchema } from './type/ObjectSchema';
 
 enum MethodType {
   Level = 'level',
@@ -7,7 +8,22 @@ enum MethodType {
   Eggs = 'eggs',
 }
 
-export const PokemonMoveSchema = z
+type Method =
+  | {
+      type: MethodType.Level;
+      level: number;
+    }
+  | {
+      type: MethodType.TechnicalMachine | MethodType.Eggs;
+    };
+
+export interface PokemonMove {
+  id: string;
+  moveId: string;
+  method: Method;
+}
+
+export const PokemonMoveSchema: ObjectSchema<PokemonMove> = z
   .object({
     moveId: z.string(),
     method: z.discriminatedUnion('type', [
@@ -17,5 +33,3 @@ export const PokemonMoveSchema = z
     ]),
   })
   .merge(WithIdSchema);
-
-export type PokemonMove = z.infer<typeof PokemonMoveSchema>;
