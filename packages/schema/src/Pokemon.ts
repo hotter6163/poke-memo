@@ -1,14 +1,36 @@
 import { z } from 'zod';
 import { WithIdSchema } from './common/withId';
-import { TypeSchema } from './Type';
+import { Type } from './Type';
+import { ObjectSchema } from './type/ObjectSchema';
 
-export const PokemonSchema = z
+export interface Pokemon {
+  id: string;
+  number: number;
+  paldeaNumber: number;
+  name: string;
+  englishName: string;
+  types: Type[];
+  baseStats: {
+    hitPoints: number;
+    attack: number;
+    defense: number;
+    specialAttack: number;
+    specialDefense: number;
+    speed: number;
+  };
+  abilityIds: string[];
+  hiddenAbilityId: string | null;
+  moveIds: string[];
+  referenceUrl: string;
+}
+
+export const PokemonSchema: ObjectSchema<Pokemon> = z
   .object({
     number: z.number(),
     paldeaNumber: z.number(),
     name: z.string(),
     englishName: z.string(),
-    types: z.array(TypeSchema).max(2),
+    types: z.array(z.nativeEnum(Type)).max(2),
     baseStats: z.object({
       hitPoints: z.number(),
       attack: z.number(),
@@ -23,5 +45,3 @@ export const PokemonSchema = z
     referenceUrl: z.string(),
   })
   .merge(WithIdSchema);
-
-export type Pokemon = z.infer<typeof PokemonSchema>;

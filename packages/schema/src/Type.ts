@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 export enum Type {
   Normal = 'ノーマル',
   Fire = 'ほのお',
@@ -20,5 +18,3 @@ export enum Type {
   Steel = 'はがね',
   Fairy = 'フェアリー',
 }
-
-export const TypeSchema = z.nativeEnum(Type);
