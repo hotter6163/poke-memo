@@ -1,3 +1,4 @@
+import { AbilitiesDao } from 'store';
 import { excludeNull } from 'utilities';
 import { getFullUrl } from './utils/getFullUrl';
 import { scraper } from './utils/scraper';
@@ -17,13 +18,31 @@ const saveAbilities = scraper(async (page) => {
       ]).then((data) => {
         const [aData, description] = data;
         const [href, name] = aData ?? [];
-        if (name && description && href) return { name, description, href };
+        if (name && description && href)
+          return { name, description, href: href.replace('.', '/sv') };
         else return null;
       }),
     ),
   ).then(excludeNull);
-  console.log(abilities);
-  console.log(abilities.length, trHandlers.length);
+
+  for (let i = 0; i < 1; i++) {
+    const { name, description, href } = abilities[i];
+    await page.goto(getFullUrl(abilities[i].href));
+    const englishName = await page
+      .$('p.narrow.small.right')
+      .then((elementHandler) => elementHandler?.innerText())
+      .then((innerText) => innerText?.replace('英語名：', ''));
+    if (!englishName) {
+      console.error(`english name of ability：${name} can't get`);
+      continue;
+    }
+    await AbilitiesDao().add({
+      name,
+      englishName,
+      description,
+      referenceUrl: getFullUrl(href),
+    });
+  }
 });
 
 saveAbilities();
