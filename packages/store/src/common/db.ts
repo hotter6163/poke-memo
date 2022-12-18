@@ -1,5 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import {
+  collection as firestoreCollection,
+  doc as firestoreDoc,
+  getFirestore,
+} from 'firebase/firestore';
 
 const app = initializeApp({
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -11,3 +15,9 @@ const app = initializeApp({
 });
 
 export const db = getFirestore(app);
+
+export const collection = (path: string) =>
+  firestoreCollection(db, path.split('/')[0], ...path.split('/').slice(1, path.split('/').length));
+
+export const doc = (path: string, id: string) =>
+  firestoreDoc(db, path.split('/')[0], ...path.split('/').slice(1, path.split('/').length), id);
